@@ -1,166 +1,193 @@
+```html
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SUT Tinder - เข้าสู่ระบบ</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SUT Tinder - Login</title>
 
-<style>
-* {
-    box-sizing: border-box;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
 
-body {
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #ea6666, #a24b68);
-    color: white;
-}
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background:
+        radial-gradient(circle at top, #3a1800, #120b06 55%, #080808);
+      color: white;
+    }
 
-.card {
-    width: 90%;
-    max-width: 430px;
-    padding: 40px 30px;
-    text-align: center;
-    background: rgba(255,255,255,.16);
-    border-radius: 24px;
-    box-shadow: 0 20px 50px rgba(0,0,0,.25);
-    backdrop-filter: blur(12px);
-}
+    .box {
+      width: 90%;
+      max-width: 420px;
+      padding: 35px 28px;
+      background: rgba(25, 18, 12, 0.95);
+      border: 1px solid #ff7a00;
+      border-radius: 22px;
+      box-shadow: 0 0 35px rgba(255, 122, 0, 0.25);
+    }
 
-.logo {
-    font-size: 55px;
-}
+    .logo {
+      text-align: center;
+      font-size: 32px;
+      font-weight: bold;
+      color: #ff8a00;
+      margin-bottom: 8px;
+    }
 
-h1 {
-    font-size: 40px;
-    margin: 5px 0 10px;
-}
+    .sub {
+      text-align: center;
+      color: #bbb;
+      margin-bottom: 28px;
+    }
 
-.subtitle {
-    font-size: 18px;
-    margin-bottom: 30px;
-}
+    input {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 15px;
+      border: 1px solid #444;
+      border-radius: 12px;
+      background: #151515;
+      color: white;
+      font-size: 16px;
+      outline: none;
+    }
 
-input {
-    width: 100%;
-    padding: 15px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 12px;
-    font-size: 16px;
-    outline: none;
-}
+    input:focus {
+      border-color: #ff7a00;
+    }
 
-button {
-    width: 100%;
-    padding: 15px;
-    margin-top: 15px;
-    border: none;
-    border-radius: 999px;
-    background: white;
-    color: #ca54e2;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-}
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #ff9800, #ff5e00);
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 5px;
+    }
 
-.register {
-    margin-top: 20px;
-}
+    button:hover {
+      opacity: 0.9;
+    }
 
-.register a {
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-}
-</style>
+    .link {
+      text-align: center;
+      margin-top: 22px;
+      color: #aaa;
+    }
+
+    .link a {
+      color: #ff8a00;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .link a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="card">
+  <div class="box">
 
-    <div class="logo">💕</div>
-
-    <h1>SUT Tinder</h1>
-
-    <p class="subtitle">เข้าสู่ระบบ</p>
+    <div class="logo">🧡 SUT Tinder</div>
+    <div class="sub">เข้าสู่ระบบเพื่อเริ่มจับคู่</div>
 
     <input
-        type="email"
-        id="email"
-        placeholder="อีเมล"
+      type="email"
+      id="email"
+      placeholder="อีเมล"
     >
 
     <input
-        type="password"
-        id="password"
-        placeholder="รหัสผ่าน"
+      type="password"
+      id="password"
+      placeholder="รหัสผ่าน"
     >
 
     <button onclick="login()">
-        เข้าสู่ระบบ
+      เข้าสู่ระบบ
     </button>
 
-    <div class="register">
-        ยังไม่มีบัญชี?
-        <a onclick="goRegister()">สมัครสมาชิก</a>
+    <div class="link">
+      ยังไม่มีบัญชี?
+      <a href="index.html">สมัครสมาชิก</a>
     </div>
 
-</div>
+  </div>
 
-<script>
+  <script>
 
-function login() {
+    function login() {
 
-    const email =
-        document.getElementById("email").value.trim();
+      const email = document
+        .getElementById("email")
+        .value
+        .trim();
 
-    const password =
-        document.getElementById("password").value;
+      const password = document
+        .getElementById("password")
+        .value;
 
-    const savedUser =
-        localStorage.getItem("sutTinderUser");
-
-    if (!savedUser) {
-        alert("ยังไม่มีบัญชี กรุณาสมัครสมาชิกก่อน");
+      if (!email || !password) {
+        alert("กรุณากรอกอีเมลและรหัสผ่าน");
         return;
-    }
+      }
 
-    const user = JSON.parse(savedUser);
+      // ดึงข้อมูลผู้ใช้ทั้งหมด
+      const users =
+        JSON.parse(
+          localStorage.getItem("sutTinderUsers")
+        ) || [];
 
-    if (
-        email === user.email &&
-        password === user.password
-    ) {
+      // ค้นหาผู้ใช้
+      const user = users.find(u =>
+        u.email.toLowerCase() === email.toLowerCase() &&
+        u.password === password
+      );
 
-        // จำสถานะว่าเข้าสู่ระบบแล้ว
-        localStorage.setItem(
-            "sutTinderLoggedIn",
-            "true"
-        );
-
-        alert("เข้าสู่ระบบสำเร็จ 💕");
-
-        window.location.href = "home.html";
-
-    } else {
-
+      // ไม่พบผู้ใช้
+      if (!user) {
         alert("อีเมลหรือรหัสผ่านไม่ถูกต้อง");
+        return;
+      }
 
+      // ตั้งสถานะ Login
+      localStorage.setItem(
+        "sutTinderLoggedIn",
+        "true"
+      );
+
+      // บันทึกผู้ใช้ที่ Login อยู่
+      localStorage.setItem(
+        "sutTinderUser",
+        JSON.stringify(user)
+      );
+
+      // สำรองข้อมูลโปรไฟล์
+      localStorage.setItem(
+        "sutTinderMyProfile",
+        JSON.stringify(user)
+      );
+
+      // ไปหน้า Home
+      window.location.href = "home.html";
     }
-}
 
-function goRegister() {
-    window.location.href = "index.html";
-}
-
-</script>
+  </script>
 
 </body>
 </html>
+```

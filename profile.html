@@ -1,0 +1,777 @@
+```html
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SUT Tinder - Profile</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top, #3a1800, #120b06 55%, #080808);
+      color: white;
+      padding-bottom: 40px;
+    }
+
+    header {
+      height: 65px;
+      padding: 0 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(20, 12, 7, 0.98);
+      border-bottom: 1px solid #ff7a00;
+    }
+
+    .back {
+      border: none;
+      background: transparent;
+      color: white;
+      font-size: 25px;
+      cursor: pointer;
+    }
+
+    .title {
+      color: #ff9800;
+      font-size: 21px;
+      font-weight: bold;
+    }
+
+    .container {
+      width: 92%;
+      max-width: 500px;
+      margin: 25px auto;
+    }
+
+    .card {
+      background: #18120d;
+      border: 1px solid #ff7a00;
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: 0 0 30px rgba(255, 122, 0, 0.18);
+    }
+
+    .photo-area {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .photo-preview {
+      width: 150px;
+      height: 150px;
+      margin: auto;
+      border-radius: 50%;
+      background: #292929;
+      border: 3px solid #ff7a00;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-size: 65px;
+    }
+
+    .photo-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .photo-buttons label,
+    .photo-buttons button {
+      padding: 9px 13px;
+      border-radius: 10px;
+      border: 1px solid #555;
+      background: #222;
+      color: white;
+      cursor: pointer;
+    }
+
+    .photo-buttons label:hover,
+    .photo-buttons button:hover {
+      border-color: #ff7a00;
+      color: #ff9800;
+    }
+
+    #photoInput {
+      display: none;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      color: #bbb;
+      margin-bottom: 7px;
+      font-size: 14px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 13px;
+      border-radius: 11px;
+      border: 1px solid #444;
+      background: #111;
+      color: white;
+      outline: none;
+      font-size: 15px;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #ff7a00;
+    }
+
+    input:disabled {
+      color: #777;
+      cursor: not-allowed;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .save-btn {
+      width: 100%;
+      padding: 14px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 13px;
+      background: linear-gradient(135deg, #ff9800, #ff5e00);
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .save-btn:hover {
+      opacity: 0.9;
+    }
+
+    .message {
+      text-align: center;
+      margin-top: 15px;
+      min-height: 20px;
+      color: #ff9800;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+
+  <button class="back" onclick="goHome()">
+    ←
+  </button>
+
+  <div class="title">
+    👤 แก้ไขโปรไฟล์
+  </div>
+
+</header>
+
+
+<div class="container">
+
+  <div class="card">
+
+    <!-- รูปโปรไฟล์ -->
+    <div class="photo-area">
+
+      <div
+        class="photo-preview"
+        id="photoPreview"
+      >
+        👤
+      </div>
+
+      <div class="photo-buttons">
+
+        <label for="photoInput">
+          📷 เลือกรูป
+        </label>
+
+        <input
+          id="photoInput"
+          type="file"
+          accept="image/*"
+          onchange="previewPhoto(event)"
+        >
+
+        <button onclick="removePhoto()">
+          🗑️ ลบรูป
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- ชื่อ -->
+    <div class="form-group">
+
+      <label>
+        ชื่อ
+      </label>
+
+      <input
+        id="name"
+        type="text"
+        placeholder="ชื่อของคุณ"
+      >
+
+    </div>
+
+
+    <!-- อายุ -->
+    <div class="form-group">
+
+      <label>
+        อายุ
+      </label>
+
+      <input
+        id="age"
+        type="number"
+        min="1"
+        max="100"
+        placeholder="อายุ"
+      >
+
+    </div>
+
+
+    <!-- เพศ -->
+    <div class="form-group">
+
+      <label>
+        เพศ
+      </label>
+
+      <select id="gender">
+
+        <option value="ชาย">
+          ชาย
+        </option>
+
+        <option value="หญิง">
+          หญิง
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- คณะ -->
+    <div class="form-group">
+
+      <label>
+        คณะ
+      </label>
+
+      <input
+        id="faculty"
+        type="text"
+        placeholder="เช่น วิศวกรรมศาสตร์"
+      >
+
+    </div>
+
+
+    <!-- ชั้นปี -->
+    <div class="form-group">
+
+      <label>
+        ชั้นปี
+      </label>
+
+      <select id="year">
+
+        <option value="1">
+          ปี 1
+        </option>
+
+        <option value="2">
+          ปี 2
+        </option>
+
+        <option value="3">
+          ปี 3
+        </option>
+
+        <option value="4">
+          ปี 4
+        </option>
+
+        <option value="5">
+          ปี 5
+        </option>
+
+        <option value="6">
+          ปี 6
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- Email -->
+    <div class="form-group">
+
+      <label>
+        อีเมล
+      </label>
+
+      <input
+        id="email"
+        type="email"
+        disabled
+      >
+
+    </div>
+
+
+    <!-- Bio -->
+    <div class="form-group">
+
+      <label>
+        แนะนำตัว
+      </label>
+
+      <textarea
+        id="bio"
+        placeholder="แนะนำตัวเองสั้น ๆ..."
+      ></textarea>
+
+    </div>
+
+
+    <button
+      class="save-btn"
+      onclick="saveProfile()"
+    >
+      💾 บันทึกโปรไฟล์
+    </button>
+
+    <div
+      class="message"
+      id="message"
+    ></div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+  let currentUser = null;
+
+  let currentPhoto = "";
+
+
+  // =====================================
+  // ดึง Users
+  // =====================================
+
+  function getUsers() {
+
+    return JSON.parse(
+      localStorage.getItem("sutTinderUsers")
+    ) || [];
+
+  }
+
+
+  // =====================================
+  // โหลดผู้ใช้ปัจจุบัน
+  // =====================================
+
+  function getCurrentUser() {
+
+    const savedUser =
+      JSON.parse(
+        localStorage.getItem("sutTinderUser")
+      );
+
+    if (!savedUser) {
+      return null;
+    }
+
+    const users = getUsers();
+
+    return users.find(
+      user => user.id === savedUser.id
+    ) || null;
+
+  }
+
+
+  // =====================================
+  // โหลดข้อมูลโปรไฟล์
+  // =====================================
+
+  function loadProfile() {
+
+    currentUser = getCurrentUser();
+
+    if (!currentUser) {
+
+      window.location.href =
+        "login.html";
+
+      return;
+
+    }
+
+
+    document.getElementById("name").value =
+      currentUser.name || "";
+
+
+    document.getElementById("age").value =
+      currentUser.age || "";
+
+
+    document.getElementById("gender").value =
+      currentUser.gender || "ชาย";
+
+
+    document.getElementById("faculty").value =
+      currentUser.faculty || "";
+
+
+    document.getElementById("year").value =
+      currentUser.year || "1";
+
+
+    document.getElementById("email").value =
+      currentUser.email || "";
+
+
+    document.getElementById("bio").value =
+      currentUser.bio || "";
+
+
+    currentPhoto =
+      currentUser.photo || "";
+
+
+    renderPhoto();
+
+  }
+
+
+  // =====================================
+  // แสดงรูป
+  // =====================================
+
+  function renderPhoto() {
+
+    const preview =
+      document.getElementById(
+        "photoPreview"
+      );
+
+
+    if (currentPhoto) {
+
+      preview.innerHTML = `
+        <img
+          src="${currentPhoto}"
+          alt="profile"
+        >
+      `;
+
+    } else {
+
+      preview.innerHTML = "👤";
+
+    }
+
+  }
+
+
+  // =====================================
+  // เลือกรูป
+  // =====================================
+
+  function previewPhoto(event) {
+
+    const file =
+      event.target.files[0];
+
+
+    if (!file) return;
+
+
+    // จำกัดขนาดไฟล์ 5MB
+    if (file.size > 5 * 1024 * 1024) {
+
+      alert(
+        "รูปต้องมีขนาดไม่เกิน 5MB"
+      );
+
+      event.target.value = "";
+
+      return;
+
+    }
+
+
+    if (!file.type.startsWith("image/")) {
+
+      alert(
+        "กรุณาเลือกไฟล์รูปภาพ"
+      );
+
+      event.target.value = "";
+
+      return;
+
+    }
+
+
+    const reader =
+      new FileReader();
+
+
+    reader.onload = function(e) {
+
+      currentPhoto =
+        e.target.result;
+
+      renderPhoto();
+
+    };
+
+
+    reader.readAsDataURL(file);
+
+  }
+
+
+  // =====================================
+  // ลบรูป
+  // =====================================
+
+  function removePhoto() {
+
+    currentPhoto = "";
+
+    document.getElementById(
+      "photoInput"
+    ).value = "";
+
+    renderPhoto();
+
+  }
+
+
+  // =====================================
+  // บันทึกโปรไฟล์
+  // =====================================
+
+  function saveProfile() {
+
+    if (!currentUser) return;
+
+
+    const name =
+      document.getElementById("name")
+        .value
+        .trim();
+
+
+    const age =
+      Number(
+        document.getElementById("age").value
+      );
+
+
+    const gender =
+      document.getElementById("gender").value;
+
+
+    const faculty =
+      document.getElementById("faculty")
+        .value
+        .trim();
+
+
+    const year =
+      document.getElementById("year").value;
+
+
+    const bio =
+      document.getElementById("bio")
+        .value
+        .trim();
+
+
+    if (!name) {
+
+      alert("กรุณากรอกชื่อ");
+
+      return;
+
+    }
+
+
+    if (!age || age < 1 || age > 100) {
+
+      alert("กรุณากรอกอายุให้ถูกต้อง");
+
+      return;
+
+    }
+
+
+    if (!faculty) {
+
+      alert("กรุณากรอกคณะ");
+
+      return;
+
+    }
+
+
+    // ดึง Users ล่าสุด
+    const users = getUsers();
+
+
+    const index =
+      users.findIndex(
+        user => user.id === currentUser.id
+      );
+
+
+    if (index === -1) {
+
+      alert("ไม่พบข้อมูลผู้ใช้");
+
+      return;
+
+    }
+
+
+    /*
+      อัปเดตเฉพาะข้อมูลโปรไฟล์
+      ข้อมูลสำคัญ เช่น
+      email / password / likes / matches
+      จะถูกเก็บไว้เหมือนเดิม
+    */
+
+    users[index] = {
+
+      ...users[index],
+
+      name: name,
+
+      age: age,
+
+      gender: gender,
+
+      faculty: faculty,
+
+      year: year,
+
+      bio: bio,
+
+      photo: currentPhoto
+
+    };
+
+
+    const updatedUser =
+      users[index];
+
+
+    // บันทึก Users ทั้งหมด
+    localStorage.setItem(
+      "sutTinderUsers",
+      JSON.stringify(users)
+    );
+
+
+    // อัปเดต User ปัจจุบัน
+    localStorage.setItem(
+      "sutTinderUser",
+      JSON.stringify(updatedUser)
+    );
+
+
+    // อัปเดต Profile
+    localStorage.setItem(
+      "sutTinderMyProfile",
+      JSON.stringify(updatedUser)
+    );
+
+
+    currentUser =
+      updatedUser;
+
+
+    document.getElementById(
+      "message"
+    ).innerText =
+      "✅ บันทึกโปรไฟล์เรียบร้อยแล้ว";
+
+
+    setTimeout(function() {
+
+      document.getElementById(
+        "message"
+      ).innerText = "";
+
+    }, 2500);
+
+  }
+
+
+  // =====================================
+  // กลับ Home
+  // =====================================
+
+  function goHome() {
+
+    window.location.href =
+      "home.html";
+
+  }
+
+
+  // =====================================
+  // เริ่มต้น
+  // =====================================
+
+  loadProfile();
+
+</script>
+
+</body>
+</html>
+```

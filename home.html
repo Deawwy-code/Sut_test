@@ -1,2234 +1,974 @@
+```html
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>SUT Tinder 💕</title>
-
-<style>
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-
-    background: linear-gradient(
-        135deg,
-        #ea6666,
-        #a24b68
-    );
-
-    color: white;
-}
-
-
-/* =====================================================
-   HEADER
-===================================================== */
-
-header {
-
-    height: 70px;
-
-    padding: 0 20px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    background: rgba(255,255,255,.15);
-
-    backdrop-filter: blur(10px);
-
-}
-
-.logo {
-
-    font-size: 23px;
-
-    font-weight: bold;
-
-}
-
-.header-buttons {
-
-    display: flex;
-
-    gap: 8px;
-
-}
-
-.header-btn {
-
-    border: none;
-
-    padding: 10px 15px;
-
-    border-radius: 20px;
-
-    background: white;
-
-    color: #e75480;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition: .2s;
-
-}
-
-.header-btn:hover {
-
-    transform: scale(1.05);
-
-}
-
-
-/* =====================================================
-   CONTAINER
-===================================================== */
-
-.container {
-
-    width: 100%;
-
-    max-width: 450px;
-
-    margin: 25px auto;
-
-    padding: 0 15px;
-
-}
-
-
-/* =====================================================
-   MY PROFILE BUTTON
-===================================================== */
-
-.my-profile-btn {
-
-    width: 100%;
-
-    padding: 15px;
-
-    margin-bottom: 18px;
-
-    border: none;
-
-    border-radius: 18px;
-
-    background: rgba(255,255,255,.18);
-
-    color: white;
-
-    font-size: 16px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    backdrop-filter: blur(10px);
-
-}
-
-.my-profile-btn:hover {
-
-    background: rgba(255,255,255,.28);
-
-}
-
-
-/* =====================================================
-   PROFILE CARD
-===================================================== */
-
-.profile-card {
-
-    overflow: hidden;
-
-    background: white;
-
-    color: #333;
-
-    border-radius: 25px;
-
-    box-shadow:
-        0 15px 40px rgba(0,0,0,.3);
-
-    cursor: pointer;
-
-}
-
-.profile-photo {
-
-    height: 400px;
-
-    position: relative;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffd6df,
-            #f6a9bd
-        );
-
-    font-size: 110px;
-
-    overflow: hidden;
-
-}
-
-.profile-photo img {
-
-    width: 100%;
-
-    height: 100%;
-
-    object-fit: cover;
-
-    display: none;
-
-}
-
-.profile-info {
-
-    padding: 22px;
-
-}
-
-.name {
-
-    font-size: 28px;
-
-    font-weight: bold;
-
-}
-
-.details {
-
-    color: #777;
-
-    margin-top: 6px;
-
-}
-
-.bio {
-
-    margin-top: 15px;
-
-    color: #555;
-
-    line-height: 1.5;
-
-}
-
-
-/* =====================================================
-   ACTION BUTTONS
-===================================================== */
-
-.actions {
-
-    display: flex;
-
-    justify-content: center;
-
-    gap: 30px;
-
-    padding: 20px;
-
-}
-
-.action {
-
-    width: 65px;
-
-    height: 65px;
-
-    border: none;
-
-    border-radius: 50%;
-
-    background: white;
-
-    box-shadow: 0 5px 15px #0003;
-
-    font-size: 28px;
-
-    cursor: pointer;
-
-    transition: .2s;
-
-}
-
-.action:hover {
-
-    transform: scale(1.1);
-
-}
-
-.dislike {
-
-    color: #ff4d6d;
-
-}
-
-.like {
-
-    color: #20c997;
-
-}
-
-
-/* =====================================================
-   EMPTY
-===================================================== */
-
-.empty {
-
-    display: none;
-
-    text-align: center;
-
-    padding: 50px 20px;
-
-}
-
-
-/* =====================================================
-   MODAL BACKGROUND
-===================================================== */
-
-.modal {
-
-    display: none;
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 100;
-
-    background: rgba(0,0,0,.7);
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding: 20px;
-
-}
-
-
-/* =====================================================
-   DETAIL PROFILE
-===================================================== */
-
-.detail-box {
-
-    width: 100%;
-
-    max-width: 430px;
-
-    max-height: 90vh;
-
-    overflow-y: auto;
-
-    background: white;
-
-    color: #333;
-
-    border-radius: 28px;
-
-    box-shadow:
-        0 20px 60px rgba(0,0,0,.4);
-
-}
-
-.detail-photo {
-
-    width: 100%;
-
-    height: 380px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffd6df,
-            #f6a9bd
-        );
-
-    font-size: 100px;
-
-    overflow: hidden;
-
-}
-
-.detail-photo img {
-
-    width: 100%;
-
-    height: 100%;
-
-    object-fit: cover;
-
-    display: none;
-
-}
-
-.detail-content {
-
-    padding: 25px;
-
-}
-
-.detail-name {
-
-    font-size: 30px;
-
-    font-weight: bold;
-
-}
-
-.detail-info {
-
-    color: #777;
-
-    margin-top: 8px;
-
-}
-
-.detail-title {
-
-    color: #e75480;
-
-    font-size: 18px;
-
-    font-weight: bold;
-
-    margin-top: 22px;
-
-}
-
-.detail-bio {
-
-    margin-top: 8px;
-
-    line-height: 1.7;
-
-    color: #555;
-
-}
-
-.detail-actions {
-
-    display: flex;
-
-    gap: 12px;
-
-    margin-top: 25px;
-
-}
-
-.detail-action {
-
-    flex: 1;
-
-    padding: 14px;
-
-    border: none;
-
-    border-radius: 25px;
-
-    font-size: 16px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-}
-
-.detail-dislike {
-
-    background: #f1f1f1;
-
-    color: #ff4d6d;
-
-}
-
-.detail-like {
-
-    background: #e75480;
-
-    color: white;
-
-}
-
-.close-detail {
-
-    width: 100%;
-
-    margin-top: 10px;
-
-    padding: 12px;
-
-    border: none;
-
-    background: transparent;
-
-    color: #888;
-
-    cursor: pointer;
-
-}
-
-
-/* =====================================================
-   MATCH
-===================================================== */
-
-.match-box {
-
-    width: 100%;
-
-    max-width: 350px;
-
-    padding: 35px;
-
-    background: white;
-
-    color: #333;
-
-    border-radius: 25px;
-
-    text-align: center;
-
-}
-
-.match-heart {
-
-    font-size: 70px;
-
-}
-
-.match-box h2 {
-
-    color: #e75480;
-
-}
-
-.chat-btn {
-
-    width: 100%;
-
-    padding: 14px;
-
-    border: none;
-
-    border-radius: 25px;
-
-    background: #e75480;
-
-    color: white;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-}
-
-.close-btn {
-
-    width: 100%;
-
-    margin-top: 10px;
-
-    padding: 12px;
-
-    border: none;
-
-    border-radius: 25px;
-
-    background: #eee;
-
-    cursor: pointer;
-
-}
-
-
-/* =====================================================
-   MY PROFILE
-===================================================== */
-
-.my-profile-box {
-
-    width: 100%;
-
-    max-width: 430px;
-
-    max-height: 90vh;
-
-    overflow-y: auto;
-
-    background: white;
-
-    color: #333;
-
-    border-radius: 25px;
-
-    padding: 25px;
-
-}
-
-.modal-title {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    margin-bottom: 20px;
-
-}
-
-.modal-title h2 {
-
-    margin: 0;
-
-    color: #e75480;
-
-}
-
-.close-modal {
-
-    width: 38px;
-
-    height: 38px;
-
-    border: none;
-
-    border-radius: 50%;
-
-    background: #eee;
-
-    cursor: pointer;
-
-    font-size: 18px;
-
-}
-
-
-/* =====================================================
-   MY PHOTO
-===================================================== */
-
-.my-photo {
-
-    width: 150px;
-
-    height: 150px;
-
-    margin: auto;
-
-    border-radius: 50%;
-
-    overflow: hidden;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffd6df,
-            #f6a9bd
-        );
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 65px;
-
-}
-
-.my-photo img {
-
-    width: 100%;
-
-    height: 100%;
-
-    object-fit: cover;
-
-    display: none;
-
-}
-
-.photo-label {
-
-    display: block;
-
-    text-align: center;
-
-    margin: 15px 0;
-
-    color: #e75480;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-}
-
-#photoInput {
-
-    display: none;
-
-}
-
-
-/* =====================================================
-   FORM
-===================================================== */
-
-.form-group {
-
-    margin-bottom: 14px;
-
-}
-
-.form-group label {
-
-    display: block;
-
-    margin-bottom: 6px;
-
-    font-weight: bold;
-
-    color: #555;
-
-}
-
-.form-group input,
-.form-group textarea,
-.form-group select {
-
-    width: 100%;
-
-    padding: 13px;
-
-    border: 1px solid #ddd;
-
-    border-radius: 12px;
-
-    outline: none;
-
-    font-size: 15px;
-
-    font-family: Arial,sans-serif;
-
-}
-
-.form-group textarea {
-
-    min-height: 110px;
-
-    resize: vertical;
-
-}
-
-.save-btn {
-
-    width: 100%;
-
-    padding: 14px;
-
-    border: none;
-
-    border-radius: 25px;
-
-    background: #e75480;
-
-    color: white;
-
-    font-size: 16px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media(max-width:500px) {
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SUT Tinder - Home</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top, #3a1800, #120b06 55%, #080808);
+      color: white;
+    }
+
+    header {
+      height: 65px;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(20, 12, 7, 0.95);
+      border-bottom: 1px solid #ff7a00;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
 
     .logo {
-
-        font-size: 18px;
-
+      color: #ff8a00;
+      font-size: 22px;
+      font-weight: bold;
     }
 
-    .header-btn {
-
-        padding: 8px 10px;
-
-        font-size: 12px;
-
+    .menu {
+      display: flex;
+      gap: 8px;
     }
 
-    .profile-photo {
-
-        height: 360px;
-
+    .menu button {
+      border: 1px solid #555;
+      background: #181818;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 10px;
+      cursor: pointer;
     }
 
-}
+    .menu button:hover {
+      border-color: #ff7a00;
+      color: #ff9800;
+    }
 
-</style>
+    .container {
+      width: 95%;
+      max-width: 500px;
+      margin: 25px auto 50px;
+    }
+
+    .welcome {
+      text-align: center;
+      color: #ccc;
+      margin-bottom: 18px;
+    }
+
+    .card {
+      background: #18120d;
+      border: 1px solid #ff7a00;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(255, 122, 0, 0.2);
+    }
+
+    .photo {
+      width: 100%;
+      height: 400px;
+      background: #282828;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-size: 80px;
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .info {
+      padding: 20px;
+    }
+
+    .name {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .details {
+      color: #bbb;
+      margin-top: 8px;
+      line-height: 1.7;
+    }
+
+    .bio {
+      margin-top: 12px;
+      color: #ddd;
+      line-height: 1.6;
+    }
+
+    .view-profile {
+      width: 100%;
+      margin-top: 18px;
+      padding: 13px;
+      border: 1px solid #ff7a00;
+      border-radius: 12px;
+      background: transparent;
+      color: #ff9800;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+      padding: 0 20px 20px;
+    }
+
+    .actions button {
+      flex: 1;
+      padding: 14px;
+      border: none;
+      border-radius: 14px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .dislike {
+      background: #333;
+      color: white;
+    }
+
+    .like {
+      background: linear-gradient(135deg, #ff9800, #ff5e00);
+      color: white;
+    }
+
+    .empty {
+      padding: 50px 20px;
+      text-align: center;
+      background: #18120d;
+      border: 1px solid #444;
+      border-radius: 20px;
+      color: #bbb;
+    }
+
+    .match-section {
+      margin-top: 35px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      color: #ff9800;
+      margin-bottom: 15px;
+    }
+
+    .match-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      margin-bottom: 10px;
+      background: #18120d;
+      border: 1px solid #333;
+      border-radius: 15px;
+    }
+
+    .match-photo {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      background: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-size: 25px;
+      flex-shrink: 0;
+    }
+
+    .match-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .match-info {
+      flex: 1;
+    }
+
+    .match-name {
+      font-weight: bold;
+    }
+
+    .match-detail {
+      color: #999;
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    .chat-btn {
+      border: none;
+      border-radius: 10px;
+      padding: 9px 12px;
+      background: #ff7a00;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 100;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .modal-box {
+      width: 100%;
+      max-width: 450px;
+      margin: 30px auto;
+      background: #18120d;
+      border: 1px solid #ff7a00;
+      border-radius: 22px;
+      overflow: hidden;
+    }
+
+    .modal-photo {
+      width: 100%;
+      height: 350px;
+      background: #292929;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 80px;
+    }
+
+    .modal-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .modal-info {
+      padding: 20px;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      padding: 0 20px 20px;
+    }
+
+    .modal-actions button {
+      flex: 1;
+      padding: 13px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .close-btn {
+      background: #333;
+      color: white;
+    }
+
+    .modal-like {
+      background: linear-gradient(135deg, #ff9800, #ff5e00);
+      color: white;
+    }
+  </style>
 </head>
-
 
 <body>
 
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
 <header>
+  <div class="logo">🧡 SUT Tinder</div>
 
-    <div class="logo">
-
-        💕 SUT Tinder
-
-    </div>
-
-
-    <div class="header-buttons">
-
-        <button
-            class="header-btn"
-            onclick="goChat()">
-
-            💬 แชต
-
-        </button>
-
-
-        <button
-            class="header-btn"
-            onclick="logout()">
-
-            ออกจากระบบ
-
-        </button>
-
-    </div>
-
+  <div class="menu">
+    <button onclick="goProfile()">👤</button>
+    <button onclick="goChat()">💬</button>
+    <button onclick="logout()">ออก</button>
+  </div>
 </header>
-
-
-
-<!-- =====================================================
-     MAIN
-===================================================== -->
 
 <div class="container">
 
+  <div class="welcome" id="welcome">
+    กำลังโหลด...
+  </div>
 
-    <button
-        class="my-profile-btn"
-        onclick="openMyProfile()">
+  <div id="profileArea"></div>
 
-        👤 โปรไฟล์ของฉัน
-
-        <br>
-
-        <small>
-            กดเพื่อแก้ไขข้อมูลและรูปโปรไฟล์
-        </small>
-
-    </button>
-
-
-    <!-- =================================================
-         OTHER PROFILE
-    ================================================== -->
-
-    <div id="profileArea">
-
-        <div
-            class="profile-card"
-            onclick="openDetail()">
-
-            <div
-                class="profile-photo"
-                id="photo">
-
-                <span id="profileEmoji">
-                    👩🏻
-                </span>
-
-                <img
-                    id="profileImage"
-                    alt="profile">
-
-            </div>
-
-
-            <div class="profile-info">
-
-                <div
-                    class="name"
-                    id="profileName">
-
-                    -
-
-                </div>
-
-
-                <div
-                    class="details"
-                    id="details">
-
-                    -
-
-                </div>
-
-
-                <div
-                    class="bio"
-                    id="bio">
-
-                    -
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="actions">
-
-            <button
-                class="action dislike"
-                onclick="dislike()">
-
-                ✕
-
-            </button>
-
-
-            <button
-                class="action like"
-                onclick="like()">
-
-                ♥️
-
-            </button>
-
-        </div>
-
+  <div class="match-section">
+    <div class="section-title">
+      💕 Match ของฉัน
     </div>
 
-
-    <!-- EMPTY -->
-
-    <div
-        class="empty"
-        id="empty">
-
-        <h1>💕</h1>
-
-        <h2>
-            หมดคนให้ดูแล้ว
-        </h2>
-
-        <p>
-            ลองกลับมาใหม่ภายหลังนะ
-        </p>
-
-        <button
-            class="header-btn"
-            onclick="resetProfiles()">
-
-            🔄 เริ่มใหม่
-
-        </button>
-
-    </div>
+    <div id="matchList"></div>
+  </div>
 
 </div>
 
+<!-- PROFILE MODAL -->
+<div class="modal" id="profileModal">
 
+  <div class="modal-box">
 
-<!-- =====================================================
-     DETAIL MODAL
-===================================================== -->
+    <div class="modal-photo" id="modalPhoto">
+      👤
+    </div>
 
-<div
-    class="modal"
-    id="detailModal">
+    <div class="modal-info">
 
-    <div class="detail-box">
+      <div class="name" id="modalName">
+        -
+      </div>
 
+      <div class="details" id="modalDetails">
+        -
+      </div>
 
-        <div
-            class="detail-photo">
-
-            <span id="detailEmoji">
-                👤
-            </span>
-
-            <img
-                id="detailImage"
-                alt="รูปโปรไฟล์">
-
-        </div>
-
-
-        <div class="detail-content">
-
-            <div
-                class="detail-name"
-                id="detailName">
-
-                -
-
-            </div>
-
-
-            <div
-                class="detail-info"
-                id="detailInfo">
-
-                -
-
-            </div>
-
-
-            <div class="detail-title">
-
-                📝 เกี่ยวกับฉัน
-
-            </div>
-
-
-            <div
-                class="detail-bio"
-                id="detailBio">
-
-                -
-
-            </div>
-
-
-            <div class="detail-actions">
-
-                <button
-                    class="detail-action detail-dislike"
-                    onclick="detailDislike()">
-
-                    ✕ ไม่สนใจ
-
-                </button>
-
-
-                <button
-                    class="detail-action detail-like"
-                    onclick="detailLike()">
-
-                    💕 ถูกใจ
-
-                </button>
-
-            </div>
-
-
-            <button
-                class="close-detail"
-                onclick="closeDetail()">
-
-                ปิด
-
-            </button>
-
-        </div>
+      <div class="bio" id="modalBio">
+        -
+      </div>
 
     </div>
 
-</div>
+    <div class="modal-actions">
 
+      <button class="close-btn" onclick="closeModal()">
+        ปิด
+      </button>
 
-
-<!-- =====================================================
-     MATCH MODAL
-===================================================== -->
-
-<div
-    class="modal"
-    id="matchModal">
-
-    <div class="match-box">
-
-        <div class="match-heart">
-
-            💕
-
-        </div>
-
-
-        <h2>
-
-            It's a Match!
-
-        </h2>
-
-
-        <p>
-
-            คุณกับ
-
-            <b id="matchName">
-                -
-            </b>
-
-            <br>
-
-            ถูกใจกันแล้ว!
-
-        </p>
-
-
-        <button
-            class="chat-btn"
-            onclick="goChat()">
-
-            💬 เริ่มแชต
-
-        </button>
-
-
-        <button
-            class="close-btn"
-            onclick="closeMatch()">
-
-            ไว้ทีหลัง
-
-        </button>
+      <button class="modal-like" onclick="likeCurrent()">
+        ❤️ Like
+      </button>
 
     </div>
 
-</div>
-
-
-
-<!-- =====================================================
-     MY PROFILE MODAL
-===================================================== -->
-
-<div
-    class="modal"
-    id="myProfileModal">
-
-    <div class="my-profile-box">
-
-
-        <div class="modal-title">
-
-            <h2>
-                👤 โปรไฟล์ของฉัน
-            </h2>
-
-
-            <button
-                class="close-modal"
-                onclick="closeMyProfile()">
-
-                ✕
-
-            </button>
-
-        </div>
-
-
-        <!-- PHOTO -->
-
-        <div class="my-photo">
-
-            <span id="myPhotoEmoji">
-                👤
-            </span>
-
-            <img
-                id="myPhoto"
-                alt="รูปของฉัน">
-
-        </div>
-
-
-        <label
-            class="photo-label"
-            for="photoInput">
-
-            📷 เปลี่ยนรูปโปรไฟล์
-
-        </label>
-
-
-        <input
-            type="file"
-            id="photoInput"
-            accept="image/*"
-            onchange="previewPhoto(event)">
-
-
-        <!-- NAME -->
-
-        <div class="form-group">
-
-            <label>
-                ชื่อ
-            </label>
-
-            <input
-                id="myName"
-                type="text"
-                placeholder="ชื่อของคุณ">
-
-        </div>
-
-
-        <!-- AGE -->
-
-        <div class="form-group">
-
-            <label>
-                อายุ
-            </label>
-
-            <input
-                id="myAge"
-                type="number"
-                min="18"
-                max="100"
-                placeholder="อายุ">
-
-        </div>
-
-
-        <!-- FACULTY -->
-
-        <div class="form-group">
-
-            <label>
-                คณะ
-            </label>
-
-            <input
-                id="myFaculty"
-                type="text"
-                placeholder="เช่น วิศวกรรมศาสตร์">
-
-        </div>
-
-
-        <!-- YEAR -->
-
-        <div class="form-group">
-
-            <label>
-                ชั้นปี
-            </label>
-
-            <select id="myYear">
-
-                <option value="">
-                    เลือกชั้นปี
-                </option>
-
-                <option value="ปี 1">
-                    ปี 1
-                </option>
-
-                <option value="ปี 2">
-                    ปี 2
-                </option>
-
-                <option value="ปี 3">
-                    ปี 3
-                </option>
-
-                <option value="ปี 4">
-                    ปี 4
-                </option>
-
-                <option value="อื่น ๆ">
-                    อื่น ๆ
-                </option>
-
-            </select>
-
-        </div>
-
-
-        <!-- BIO -->
-
-        <div class="form-group">
-
-            <label>
-                📝 แนะนำตัวเอง
-            </label>
-
-            <textarea
-                id="myBio"
-                placeholder="เขียนเกี่ยวกับตัวคุณ งานอดิเรก สิ่งที่ชอบ ฯลฯ"></textarea>
-
-        </div>
-
-
-        <button
-            class="save-btn"
-            onclick="saveMyProfile()">
-
-            💾 บันทึกโปรไฟล์
-
-        </button>
-
-    </div>
+  </div>
 
 </div>
-
-
 
 <script>
 
-/* =====================================================
-   LOGIN CHECK
-===================================================== */
+  let currentProfile = null;
 
-const loggedIn =
-    localStorage.getItem(
-        "sutTinderLoggedIn"
+  // ==============================
+  // ดึงข้อมูลทั้งหมด
+  // ==============================
+
+  function getUsers() {
+
+    return JSON.parse(
+      localStorage.getItem("sutTinderUsers")
+    ) || [];
+
+  }
+
+
+  // ==============================
+  // ดึงข้อมูลผู้ใช้ปัจจุบัน
+  // ==============================
+
+  function getMe() {
+
+    const current =
+      JSON.parse(
+        localStorage.getItem("sutTinderUser")
+      );
+
+    if (!current) return null;
+
+    const users = getUsers();
+
+    return users.find(
+      u => u.id === current.id
+    ) || null;
+
+  }
+
+
+  // ==============================
+  // บันทึกข้อมูล
+  // ==============================
+
+  function saveUsers(users, me) {
+
+    localStorage.setItem(
+      "sutTinderUsers",
+      JSON.stringify(users)
     );
 
-const savedUser =
-    localStorage.getItem(
-        "sutTinderUser"
+    localStorage.setItem(
+      "sutTinderUser",
+      JSON.stringify(me)
     );
 
+    localStorage.setItem(
+      "sutTinderMyProfile",
+      JSON.stringify(me)
+    );
 
-if (
-    loggedIn !== "true" ||
-    !savedUser
-) {
-
-    window.location.href =
-        "login.html";
-
-}
+  }
 
 
-/* =====================================================
-   PROFILES
-===================================================== */
+  // ==============================
+  // เริ่มต้น
+  // ==============================
 
-const profiles = [
+  function init() {
 
-    {
-        name: "มายด์",
-        age: 21,
-        faculty: "วิศวกรรมศาสตร์",
-        year: "ปี 3",
-        emoji: "👩🏻",
-        photo: "",
-        bio:
-            "ชอบคาเฟ่ ดูหนัง และถ่ายรูป ☕🎬📸"
-    },
+    const me = getMe();
 
-    {
-        name: "แพร",
-        age: 20,
-        faculty: "เทคโนโลยีสังคม",
-        year: "ปี 2",
-        emoji: "👩🏼",
-        photo: "",
-        bio:
-            "สายเที่ยว ชอบทะเลและอาหารอร่อย 🌊🍜"
-    },
+    if (!me) {
 
-    {
-        name: "ฟ้า",
-        age: 22,
-        faculty: "วิทยาศาสตร์",
-        year: "ปี 4",
-        emoji: "👩🏽",
-        photo: "",
-        bio:
-            "ชอบฟังเพลง เล่นเกม และแมว 🎵🎮🐱"
-    },
-
-    {
-        name: "น้ำ",
-        age: 21,
-        faculty: "แพทยศาสตร์",
-        year: "ปี 3",
-        emoji: "👩🏻‍🦰",
-        photo: "",
-        bio:
-            "ชอบออกกำลังกายและเดินเล่นตอนเย็น 🏃‍♀️🌅"
-    },
-
-    {
-        name: "พลอย",
-        age: 20,
-        faculty: "บริหารธุรกิจ",
-        year: "ปี 2",
-        emoji: "👩🏻‍🦱",
-        photo: "",
-        bio:
-            "ชอบเพลง คาเฟ่ และแมวน่ารัก 🐱💕"
-    }
-
-];
-
-
-let current = 0;
-
-
-/* =====================================================
-   SHOW PROFILE
-===================================================== */
-
-function showProfile() {
-
-    if (
-        current >= profiles.length
-    ) {
-
-        document
-            .getElementById(
-                "profileArea"
-            )
-            .style.display =
-            "none";
-
-
-        document
-            .getElementById(
-                "empty"
-            )
-            .style.display =
-            "block";
-
-
-        return;
+      window.location.href = "login.html";
+      return;
 
     }
 
+    document.getElementById("welcome").innerText =
+      "สวัสดี " + me.name + " 👋";
 
-    const person =
-        profiles[current];
+    showNextProfile();
+    renderMatches();
 
-
-    const image =
-        document.getElementById(
-            "profileImage"
-        );
+  }
 
 
-    const emoji =
-        document.getElementById(
-            "profileEmoji"
-        );
+  // ==============================
+  // แสดงคนเพศตรงข้าม
+  // ==============================
 
+  function showNextProfile() {
 
-    if (person.photo) {
+    const me = getMe();
 
-        image.src =
-            person.photo;
+    if (!me) return;
 
-        image.style.display =
-            "block";
+    const users = getUsers();
 
-        emoji.style.display =
-            "none";
+    const profiles = users.filter(
+      u =>
+        u.id !== me.id &&
+        u.gender !== me.gender
+    );
 
-    }
+    if (profiles.length === 0) {
 
-    else {
+      document.getElementById("profileArea").innerHTML = `
+        <div class="empty">
+          <div style="font-size:50px;">😅</div>
+          <h3>ยังไม่มีคนให้ค้นหา</h3>
+          <p>ลองเพิ่มผู้ใช้งานคนอื่นก่อน</p>
+        </div>
+      `;
 
-        image.style.display =
-            "none";
-
-        emoji.style.display =
-            "inline";
-
-        emoji.textContent =
-            person.emoji;
-
-    }
-
-
-    document
-        .getElementById(
-            "profileName"
-        )
-        .textContent =
-        person.name +
-        ", " +
-        person.age;
-
-
-    document
-        .getElementById(
-            "details"
-        )
-        .textContent =
-        person.faculty +
-        " • " +
-        person.year;
-
-
-    document
-        .getElementById(
-            "bio"
-        )
-        .textContent =
-        person.bio;
-
-}
-
-
-/* =====================================================
-   OPEN DETAIL
-===================================================== */
-
-function openDetail() {
-
-    if (
-        current >= profiles.length
-    ) {
-        return;
-    }
-
-
-    const person =
-        profiles[current];
-
-
-    document
-        .getElementById(
-            "detailName"
-        )
-        .textContent =
-        person.name +
-        ", " +
-        person.age;
-
-
-    document
-        .getElementById(
-            "detailInfo"
-        )
-        .textContent =
-        person.faculty +
-        " • " +
-        person.year;
-
-
-    document
-        .getElementById(
-            "detailBio"
-        )
-        .textContent =
-        person.bio;
-
-
-    const image =
-        document.getElementById(
-            "detailImage"
-        );
-
-
-    const emoji =
-        document.getElementById(
-            "detailEmoji"
-        );
-
-
-    if (person.photo) {
-
-        image.src =
-            person.photo;
-
-        image.style.display =
-            "block";
-
-        emoji.style.display =
-            "none";
+      currentProfile = null;
+      return;
 
     }
 
-    else {
+    /*
+      เลือกคนที่ยังไม่ได้ Like หรือ Dislike
+      โดยใช้ disliked เป็นข้อมูลเสริม
+    */
 
-        image.style.display =
-            "none";
+    const available = profiles.filter(u => {
 
-        emoji.style.display =
-            "inline";
+      const liked =
+        me.likes?.includes(u.id);
 
-        emoji.textContent =
-            person.emoji;
+      const disliked =
+        me.disliked?.includes(u.id);
+
+      return !liked && !disliked;
+
+    });
+
+    if (available.length === 0) {
+
+      document.getElementById("profileArea").innerHTML = `
+        <div class="empty">
+          <div style="font-size:50px;">🎉</div>
+          <h3>ดูครบหมดแล้ว!</h3>
+          <p>ยังไม่มีโปรไฟล์ใหม่ให้แสดง</p>
+        </div>
+      `;
+
+      currentProfile = null;
+      return;
+
+    }
+
+    currentProfile = available[0];
+
+    renderProfile(currentProfile);
+
+  }
+
+
+  // ==============================
+  // แสดง Card
+  // ==============================
+
+  function renderProfile(user) {
+
+    const photo = user.photo
+      ? `<img src="${user.photo}" alt="profile">`
+      : `👤`;
+
+    document.getElementById("profileArea").innerHTML = `
+
+      <div class="card">
+
+        <div class="photo">
+          ${photo}
+        </div>
+
+        <div class="info">
+
+          <div class="name">
+            ${escapeHTML(user.name)}, ${user.age}
+          </div>
+
+          <div class="details">
+            👤 ${escapeHTML(user.gender)}<br>
+            🎓 ${escapeHTML(user.faculty || "-")}<br>
+            📚 ปี ${escapeHTML(user.year || "-")}
+          </div>
+
+          <div class="bio">
+            ${escapeHTML(user.bio || "ยังไม่มีคำแนะนำตัว")}
+          </div>
+
+          <button
+            class="view-profile"
+            onclick="openProfile()"
+          >
+            👀 ดูโปรไฟล์เพิ่มเติม
+          </button>
+
+        </div>
+
+        <div class="actions">
+
+          <button
+            class="dislike"
+            onclick="dislikeCurrent()"
+          >
+            ❌ Dislike
+          </button>
+
+          <button
+            class="like"
+            onclick="likeCurrent()"
+          >
+            ❤️ Like
+          </button>
+
+        </div>
+
+      </div>
+    `;
+
+  }
+
+
+  // ==============================
+  // เปิด Profile Modal
+  // ==============================
+
+  function openProfile() {
+
+    if (!currentProfile) return;
+
+    const user = currentProfile;
+
+    const photo = user.photo
+      ? `<img src="${user.photo}" alt="profile">`
+      : `👤`;
+
+    document.getElementById("modalPhoto").innerHTML =
+      photo;
+
+    document.getElementById("modalName").innerText =
+      `${user.name}, ${user.age}`;
+
+    document.getElementById("modalDetails").innerHTML =
+      `👤 ${escapeHTML(user.gender)}<br>
+       🎓 ${escapeHTML(user.faculty || "-")}<br>
+       📚 ชั้นปี ${escapeHTML(user.year || "-")}<br>
+       ✉️ ${escapeHTML(user.email || "-")}`;
+
+    document.getElementById("modalBio").innerText =
+      user.bio || "ยังไม่มีคำแนะนำตัว";
+
+    document.getElementById("profileModal").style.display =
+      "block";
+
+  }
+
+
+  // ==============================
+  // ปิด Modal
+  // ==============================
+
+  function closeModal() {
+
+    document.getElementById("profileModal").style.display =
+      "none";
+
+  }
+
+
+  // ==============================
+  // Like
+  // ==============================
+
+  function likeCurrent() {
+
+    if (!currentProfile) return;
+
+    const target = currentProfile;
+
+    const users = getUsers();
+
+    const me = getMe();
+
+    const myIndex =
+      users.findIndex(u => u.id === me.id);
+
+    const targetIndex =
+      users.findIndex(u => u.id === target.id);
+
+    if (myIndex === -1 || targetIndex === -1) return;
+
+
+    // สร้าง likes ถ้ายังไม่มี
+    if (!Array.isArray(users[myIndex].likes)) {
+      users[myIndex].likes = [];
+    }
+
+    // เพิ่ม Like
+    if (!users[myIndex].likes.includes(target.id)) {
+
+      users[myIndex].likes.push(target.id);
 
     }
 
 
-    document
-        .getElementById(
-            "detailModal"
-        )
-        .style.display =
-        "flex";
-
-}
-
-
-/* =====================================================
-   CLOSE DETAIL
-===================================================== */
-
-function closeDetail() {
-
-    document
-        .getElementById(
-            "detailModal"
-        )
-        .style.display =
-        "none";
-
-}
-
-
-/* =====================================================
-   DISLIKE
-===================================================== */
-
-function dislike() {
-
-    current++;
-
-    showProfile();
-
-}
-
-
-/* =====================================================
-   DETAIL DISLIKE
-===================================================== */
-
-function detailDislike() {
-
-    closeDetail();
-
-    current++;
-
-    showProfile();
-
-}
-
-
-/* =====================================================
-   LIKE
-===================================================== */
-
-function like() {
-
-    if (
-        current >= profiles.length
-    ) {
-        return;
-    }
-
-
-    const person =
-        profiles[current];
+    // ตรวจว่าอีกฝ่าย Like เราหรือยัง
+    const targetLikes =
+      Array.isArray(users[targetIndex].likes)
+        ? users[targetIndex].likes
+        : [];
 
 
     const isMatch =
-        Math.random() > 0.4;
+      targetLikes.includes(me.id);
 
 
+    // ถ้า Match
     if (isMatch) {
 
-        localStorage.setItem(
-            "sutTinderMatchName",
-            person.name
-        );
+      if (!Array.isArray(users[myIndex].matches)) {
+        users[myIndex].matches = [];
+      }
+
+      if (!Array.isArray(users[targetIndex].matches)) {
+        users[targetIndex].matches = [];
+      }
 
 
-        localStorage.setItem(
-            "sutTinderMatchPhoto",
-            person.photo || ""
-        );
+      // เพิ่ม Match ให้ทั้งสองคน
+      if (!users[myIndex].matches.includes(target.id)) {
 
+        users[myIndex].matches.push(target.id);
 
-        document
-            .getElementById(
-                "matchName"
-            )
-            .textContent =
-            person.name;
+      }
 
+      if (!users[targetIndex].matches.includes(me.id)) {
 
-        document
-            .getElementById(
-                "matchModal"
-            )
-            .style.display =
-            "flex";
+        users[targetIndex].matches.push(me.id);
 
-    }
+      }
 
-    else {
-
-        current++;
-
-        showProfile();
-
-    }
-
-}
-
-
-/* =====================================================
-   DETAIL LIKE
-===================================================== */
-
-function detailLike() {
-
-    closeDetail();
-
-    like();
-
-}
-
-
-/* =====================================================
-   CLOSE MATCH
-===================================================== */
-
-function closeMatch() {
-
-    document
-        .getElementById(
-            "matchModal"
-        )
-        .style.display =
-        "none";
-
-
-    current++;
-
-    showProfile();
-
-}
-
-
-/* =====================================================
-   GO CHAT
-===================================================== */
-
-function goChat() {
-
-    if (
-        !localStorage.getItem(
-            "sutTinderMatchName"
-        )
-    ) {
-
-        localStorage.setItem(
-            "sutTinderMatchName",
-            profiles[0].name
-        );
-
-        localStorage.setItem(
-            "sutTinderMatchPhoto",
-            profiles[0].photo || ""
-        );
+      alert(
+        `🎉 MATCH!\n\nคุณ Match กับ ${target.name} แล้ว ❤️`
+      );
 
     }
 
 
-    window.location.href =
-        "chat.html";
+    saveUsers(users, users[myIndex]);
 
-}
+    closeModal();
 
+    currentProfile = null;
 
-/* =====================================================
-   MY PROFILE
-===================================================== */
+    showNextProfile();
 
-let myProfile = {
+    renderMatches();
 
-    name: "",
-
-    age: "",
-
-    faculty: "",
-
-    year: "",
-
-    bio: "",
-
-    photo: ""
-
-};
+  }
 
 
-/* =====================================================
-   LOAD MY PROFILE
-===================================================== */
+  // ==============================
+  // Dislike
+  // ==============================
 
-function loadMyProfile() {
+  function dislikeCurrent() {
 
-    const saved =
-        localStorage.getItem(
-            "sutTinderMyProfile"
-        );
+    if (!currentProfile) return;
 
+    const users = getUsers();
 
-    if (saved) {
+    const me = getMe();
 
-        try {
+    const myIndex =
+      users.findIndex(u => u.id === me.id);
 
-            myProfile =
-                JSON.parse(saved);
-
-        }
-
-        catch {
-
-            console.log(
-                "โหลดโปรไฟล์ไม่สำเร็จ"
-            );
-
-        }
-
-    }
+    if (myIndex === -1) return;
 
 
-    document
-        .getElementById(
-            "myName"
-        )
-        .value =
-        myProfile.name || "";
+    if (!Array.isArray(users[myIndex].disliked)) {
 
+      users[myIndex].disliked = [];
 
-    document
-        .getElementById(
-            "myAge"
-        )
-        .value =
-        myProfile.age || "";
-
-
-    document
-        .getElementById(
-            "myFaculty"
-        )
-        .value =
-        myProfile.faculty || "";
-
-
-    document
-        .getElementById(
-            "myYear"
-        )
-        .value =
-        myProfile.year || "";
-
-
-    document
-        .getElementById(
-            "myBio"
-        )
-        .value =
-        myProfile.bio || "";
-
-
-    if (myProfile.photo) {
-
-        const img =
-            document.getElementById(
-                "myPhoto"
-            );
-
-        const emoji =
-            document.getElementById(
-                "myPhotoEmoji"
-            );
-
-
-        img.src =
-            myProfile.photo;
-
-        img.style.display =
-            "block";
-
-        emoji.style.display =
-            "none";
-
-    }
-
-}
-
-
-/* =====================================================
-   OPEN MY PROFILE
-===================================================== */
-
-function openMyProfile() {
-
-    loadMyProfile();
-
-
-    document
-        .getElementById(
-            "myProfileModal"
-        )
-        .style.display =
-        "flex";
-
-}
-
-
-/* =====================================================
-   CLOSE MY PROFILE
-===================================================== */
-
-function closeMyProfile() {
-
-    document
-        .getElementById(
-            "myProfileModal"
-        )
-        .style.display =
-        "none";
-
-}
-
-
-/* =====================================================
-   PREVIEW PHOTO
-===================================================== */
-
-function previewPhoto(event) {
-
-    const file =
-        event.target.files[0];
-
-
-    if (!file) {
-        return;
     }
 
 
     if (
-        !file.type.startsWith("image/")
+      !users[myIndex].disliked.includes(
+        currentProfile.id
+      )
     ) {
 
-        alert(
-            "กรุณาเลือกไฟล์รูปภาพ"
-        );
-
-        return;
+      users[myIndex].disliked.push(
+        currentProfile.id
+      );
 
     }
 
 
-    const reader =
-        new FileReader();
+    saveUsers(users, users[myIndex]);
+
+    currentProfile = null;
+
+    showNextProfile();
+
+  }
 
 
-    reader.onload =
-        function(e) {
+  // ==============================
+  // แสดง Match
+  // ==============================
 
-            const img =
-                document.getElementById(
-                    "myPhoto"
-                );
+  function renderMatches() {
 
-            const emoji =
-                document.getElementById(
-                    "myPhotoEmoji"
-                );
+    const me = getMe();
 
+    if (!me) return;
 
-            img.src =
-                e.target.result;
+    const users = getUsers();
 
-            img.style.display =
-                "block";
+    const matchIds =
+      Array.isArray(me.matches)
+        ? me.matches
+        : [];
 
-            emoji.style.display =
-                "none";
-
-        };
+    const matchList =
+      document.getElementById("matchList");
 
 
-    reader.readAsDataURL(file);
+    if (matchIds.length === 0) {
 
-}
+      matchList.innerHTML = `
+        <div style="
+          color:#777;
+          padding:15px 0;
+        ">
+          ยังไม่มี Match 💔
+        </div>
+      `;
 
-
-/* =====================================================
-   SAVE MY PROFILE
-===================================================== */
-
-function saveMyProfile() {
-
-    const name =
-        document
-            .getElementById(
-                "myName"
-            )
-            .value
-            .trim();
-
-
-    const age =
-        document
-            .getElementById(
-                "myAge"
-            )
-            .value
-            .trim();
-
-
-    const faculty =
-        document
-            .getElementById(
-                "myFaculty"
-            )
-            .value
-            .trim();
-
-
-    const year =
-        document
-            .getElementById(
-                "myYear"
-            )
-            .value;
-
-
-    const bio =
-        document
-            .getElementById(
-                "myBio"
-            )
-            .value
-            .trim();
-
-
-    if (!name) {
-
-        alert(
-            "กรุณาใส่ชื่อ"
-        );
-
-        return;
+      return;
 
     }
 
 
-    if (!age) {
-
-        alert(
-            "กรุณาใส่อายุ"
-        );
-
-        return;
-
-    }
+    matchList.innerHTML = "";
 
 
-    if (!faculty) {
+    matchIds.forEach(id => {
 
-        alert(
-            "กรุณาใส่คณะ"
-        );
+      const user =
+        users.find(u => u.id === id);
 
-        return;
-
-    }
+      if (!user) return;
 
 
-    if (!year) {
-
-        alert(
-            "กรุณาเลือกชั้นปี"
-        );
-
-        return;
-
-    }
+      const photo = user.photo
+        ? `<img src="${user.photo}" alt="profile">`
+        : `👤`;
 
 
-    if (!bio) {
+      const div =
+        document.createElement("div");
 
-        alert(
-            "กรุณาเขียนแนะนำตัวเอง"
-        );
+      div.className = "match-card";
 
-        return;
+      div.innerHTML = `
 
-    }
+        <div class="match-photo">
+          ${photo}
+        </div>
+
+        <div class="match-info">
+
+          <div class="match-name">
+            ${escapeHTML(user.name)}
+          </div>
+
+          <div class="match-detail">
+            ${escapeHTML(user.faculty || "-")}
+          </div>
+
+        </div>
+
+        <button
+          class="chat-btn"
+          onclick="openChat('${user.id}')"
+        >
+          💬 แชต
+        </button>
+
+      `;
 
 
-    const img =
-        document.getElementById(
-            "myPhoto"
-        );
+      matchList.appendChild(div);
+
+    });
+
+  }
 
 
-    let photo =
-        myProfile.photo || "";
+  // ==============================
+  // ไปหน้า Chat
+  // ==============================
 
-
-    if (
-        img.style.display !== "none" &&
-        img.src
-    ) {
-
-        photo =
-            img.src;
-
-    }
-
-
-    myProfile = {
-
-        name: name,
-
-        age: age,
-
-        faculty: faculty,
-
-        year: year,
-
-        bio: bio,
-
-        photo: photo
-
-    };
-
+  function openChat(id) {
 
     localStorage.setItem(
-
-        "sutTinderMyProfile",
-
-        JSON.stringify(
-            myProfile
-        )
-
+      "sutTinderSelectedChatId",
+      id
     );
-
-
-    alert(
-        "บันทึกโปรไฟล์เรียบร้อยแล้ว 💕"
-    );
-
-
-    closeMyProfile();
-
-}
-
-
-/* =====================================================
-   RESET
-===================================================== */
-
-function resetProfiles() {
-
-    current = 0;
-
-
-    document
-        .getElementById(
-            "profileArea"
-        )
-        .style.display =
-        "block";
-
-
-    document
-        .getElementById(
-            "empty"
-        )
-        .style.display =
-        "none";
-
-
-    showProfile();
-
-}
-
-
-/* =====================================================
-   LOGOUT
-===================================================== */
-
-function logout() {
-
-    localStorage.removeItem(
-        "sutTinderLoggedIn"
-    );
-
 
     window.location.href =
-        "login.html";
+      "chat.html";
 
-}
+  }
 
 
-/* =====================================================
-   START
-===================================================== */
+  // ==============================
+  // ปุ่มต่าง ๆ
+  // ==============================
 
-loadMyProfile();
+  function goProfile() {
 
-showProfile();
+    window.location.href =
+      "profile.html";
+
+  }
+
+
+  function goChat() {
+
+    window.location.href =
+      "chat.html";
+
+  }
+
+
+  function logout() {
+
+    localStorage.removeItem(
+      "sutTinderLoggedIn"
+    );
+
+    localStorage.removeItem(
+      "sutTinderUser"
+    );
+
+    localStorage.removeItem(
+      "sutTinderMyProfile"
+    );
+
+    window.location.href =
+      "login.html";
+
+  }
+
+
+  // ==============================
+  // ป้องกัน HTML แปลก ๆ
+  // ==============================
+
+  function escapeHTML(text) {
+
+    return String(text)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+  // ==============================
+  // คลิกพื้นหลัง Modal เพื่อปิด
+  // ==============================
+
+  document
+    .getElementById("profileModal")
+    .addEventListener("click", function(e) {
+
+      if (e.target === this) {
+        closeModal();
+      }
+
+    });
+
+
+  // ==============================
+  // เริ่มทำงาน
+  // ==============================
+
+  init();
 
 </script>
 
 </body>
 </html>
+```
